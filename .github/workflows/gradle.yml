@@ -49,4 +49,5 @@ jobs:
         username: ${{ secrets.CONFIG_SERVER_USERNAME }}
         key: ${{ secrets.CONFIG_SERVER_KEY }}
         port: ${{ secrets.CONFIG_SERVER_PORT }}
+        passphrase: ${{ secrets.CONFIG_SERVER_PASSWORD }}
 
