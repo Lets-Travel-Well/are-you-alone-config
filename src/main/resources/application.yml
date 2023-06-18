@@ -9,6 +9,8 @@ spring:
         git:
           uri: https://github.com/Lets-Travel-Well/are-you-alone-config-file
           default-label: main
+        encrypt: #모든 설정 정보를 암호화 시키겠다는 의미
+          enabled: false
 
 # actuator 설정
 management:
@@ -19,3 +21,6 @@ management:
   endpoint:
     shutdown:
       enabled: true
+
+encrypt: #암호화 시키는데 사용하는 key값
+  key: key-brain
