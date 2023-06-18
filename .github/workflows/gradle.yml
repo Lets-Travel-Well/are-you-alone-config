@@ -1,81 +1,32 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+name: Java CI with Gradle
 
-name: Java CI with Gradle #레포에 보일 이름
-
-# 다음에 해당하는 action이 해당 브랜치에 일어날때 동작
 on:
   push:
     branches: main
   pull_request:
-    branches: main
+     branches: main
 
 permissions:
   contents: read
 
-# 동작할 job 목록
 jobs:
   build:
-    # 실행 환경 지정
     runs-on: ubuntu-latest
-    
-    # Task의 sequence 지정
     steps:
-    
-    # jdk setting
-    - uses: actions/checkout@v3
-    - name: Set up JDK 8
-      uses: actions/setup-java@v3
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-    
-    # gradle caching
-    - name: Gradle Caching
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-    
-#     ## create application-dev.properties
-#     - name: make application-dev.properties
-#       if: contains(github.ref, 'develop') # branch가 develop일 때
-#       run: |
-#       	# spring의 resources 경로로 이동
-#         cd ./src/main/resources 
-        
-#         # application-dev.properties 파일 생성
-#         touch ./application-dev.properties 
-        
-#         # GitHub-Actions에서 설정한 값을 application-dev.properties 파일에 쓰기
-#         echo "${{ secrets.PROPERTIES_DEV }}" > ./application-dev.properties 
-#       shell: bash
 
-#     ## create application-prod.properties
-#     - name: make application-prod.properties
-#       if: contains(github.ref, 'main') # branch가 main 일 때, 나머지는 위와 동일
-#       run: |
-#           cd ./src/main/resources
-#           touch ./application-prod.properties
-#           echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
-#       shell: bash
-    
-    
-    
-    # gradlew 권한 부여
-    - name: Run chmod to make gradlew executable
-      run: chmod +x ./gradlew
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       
-    # gradle build
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
+      ## gradle build
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+      
