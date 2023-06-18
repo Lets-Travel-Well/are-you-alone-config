@@ -47,7 +47,6 @@ jobs:
       with:
         host: ${{ secrets.CONFIG_SERVER_HOST }}
         username: ${{ secrets.CONFIG_SERVER_USERNAME }}
-        key: ${{ secrets.CONFIG_SERVER_KEY }}
+#         key: ${{ secrets.CONFIG_SERVER_KEY }}
         port: ${{ secrets.CONFIG_SERVER_PORT }}
-        agent: true
 
