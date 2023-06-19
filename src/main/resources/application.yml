@@ -31,4 +31,4 @@ management:
       enabled: true
 
 encrypt: #암호화 시키는데 사용하는 key값
-  key: key-brain
+  key: 
