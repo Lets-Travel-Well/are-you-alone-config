@@ -49,7 +49,7 @@ jobs:
           username: ${{ secrets.CONFIG_SERVER_USERNAME }}
           key: ${{ secrets.CONFIG_SERVER_KEY }}
           port: ${{ secrets.CONFIG_SERVER_PORT }}
-          passphrase: ${{ secrets.CONFIG_SERVER_PASSWORD }}
+          passphrase: ${{ secrets.CONFIG_SERVER_PASSPHRASE }}
           script: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_CONFIG_SERVER }}
             sudo docker stop ${{secrets.DOCKERHUB_CONFIG_SERVER}}
